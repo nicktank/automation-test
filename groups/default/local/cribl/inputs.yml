@@ -6,3 +6,11 @@ inputs:
     type: criblmetrics
     disabled: false
     pipeline: cribl_metrics_rollup
+  syslog:
+    disabled: false
+    samples:
+      - eventsPerSec: 10
+        sample: syslog
+      - eventsPerSec: 10
+        sample: apache_error
+    type: datagen
