@@ -1,0 +1,13 @@
+{
+  "patternList": {
+    "ui:field": "Table",
+    "items": {
+      "regex": {
+        "ui:placeholder": "Grok pattern",
+        "ui:options": {
+          "columnWidth": "100%"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "title": "",
+  "properties": {
+    "baseFields": {
+      "title": "Base Fields",
+      "description": "Base field(s) on which renaming tasks will be executed. If not specified, rename will be performed on top level fields.",
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "rename": {
+      "title": "Rename Fields",
+      "description": "Set of key-value pairs to rename fields, where key is the current name and value is the new name",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["currentName", "newName"],
+        "properties": {
+          "currentName": {
+            "type": "string",
+            "title": "Current Name",
+            "description": "Name of the field to rename. Literal identifiers must be quoted."
+          },
+          "newName": {
+            "type": "string",
+            "title": "New Name",
+            "description": "The name the field will be renamed to. Literal identifiers must be quoted."
+          }
+        }
+      }
+    },
+    "renameExpr": {
+      "title": "Renaming Expression",
+      "description": "JavaScript expression (or literal) used to compute fields new name. Expression is evaluated against {name, value} context. The value returned by this expression will be used to rename fields. Example: `name.startsWith('data') ? name.toUpperCase() : name`",
+      "type": "string",
+      "jsExpression": true
+    }    
+  }
+}

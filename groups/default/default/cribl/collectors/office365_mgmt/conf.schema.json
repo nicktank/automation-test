@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "title": "",
+  "required": ["plan_type","tenant_id","app_id","client_secret","content_type"],
+  "properties": {
+    "plan_type": {
+      "type": "string",
+      "title": "Subscription Plan",
+      "description": "Office 365 subscription plan for your organization, typically Enterprise and GCC Government Plan",
+      "enum": [ "enterprise_gcc", "gcc_high", "dod" ],
+      "enumNames": [ "Enterprise and GCC Government Plan", "GCC High Government Plan", "DoD government plan" ],
+      "default": "enterprise_gcc"
+    },
+    "tenant_id": {
+      "type": "string",
+      "title": "Tenant Identifier",
+      "minLength": 1,
+      "description": "Directory ID (tenant identifier) in Azure Active Directory"
+    },
+    "app_id": {
+      "type": "string",
+      "title": "Application Identifier",
+      "minLength": 1,
+      "description": "Identifier of the registered application in Azure Active Directory."
+    },
+    "client_secret": {
+      "type": "string",
+      "title": "Client Secret",
+      "description": "Application key of the registered application.",
+      "minLength": 1,
+      "encrypt": true
+    },
+    "content_type": {
+      "type": "string",
+      "title": "Content Type",
+      "description": "The type of content to retrieve from the office 365 management communications API.",
+      "enum": [ "Audit.AzureActiveDirectory", "Audit.Exchange", "Audit.SharePoint", "Audit.General", "DLP.All" ],
+      "enumNames": [ "Active Directory", "Exchange", "SharePoint", "General", "Data Loss Prevention" ],
+      "default": "Audit.AzureActiveDirectory"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "outputName": {
+    "ui:widget": "OutputName",
+    "ui:forceRender": true,
+    "ui:options": {
+      "outputType": "rest",
+      "outputProps": {
+        "discovery": "discovery",
+        "collectUrl": "collectUrl",
+        "collectMethod": "collectMethod",
+        "collectRequestParams": "collectRequestParams",
+        "collectRequestHeaders": "collectRequestHeaders",
+        "authentication": "authentication",
+        "username": "username",
+        "password": "password",
+        "loginUrl": "loginUrl",
+        "loginBody": "loginBody",
+        "tokenRespAttribute": "tokenRespAttribute",
+        "authHeaderExpr": "authHeaderExpr"
+      }
+    }
+  },
+  "discovery" : {
+    "discoverUrl": {
+      "ui:widget": "JsInput", "ui:placeholder": "Enter URL expression for the discover operation", "ui:options": { "columnWidth": "60%" }
+    },
+    "discoverRequestParams": {
+      "ui:field": "Table",
+      "items": {
+        "name": { "ui:placeholder": "Enter parameter name", "ui:options": { "columnWidth": "40%" } },
+        "value": { "ui:widget": "JsInput", "ui:placeholder": "Enter parameter value expression", "ui:options": { "columnWidth": "60%" } }
+      }
+    },
+    "discoverRequestHeaders": {
+      "ui:field": "Table",
+      "items": {
+        "name": { "ui:placeholder": "Enter header name", "ui:options": { "columnWidth": "40%" } },
+        "value": { "ui:widget": "JsInput", "ui:placeholder": "Enter header value", "ui:options": { "columnWidth": "60%" } }
+      }
+    },
+    "discoverDataField": {
+      "ui:placeholder": "Enter name of the field that contains discover results"
+    },
+    "itemList": {
+      "ui:field": "Tags",
+      "ui:placeholder": "Enter list of items to return from the discover task.",
+      "ui:options": {
+        "separator": ","
+      }
+    },
+    "manualDiscoverResult": {
+      "ui:widget": "TextareaUpload",
+      "ui:options": {
+        "rows": 5
+      }
+    }
+  },
+  "collectUrl": {
+    "ui:widget": "JsInput", "ui:placeholder": "Enter URL expression for the collect operation", "ui:options": { "columnWidth": "60%" }
+  },
+  "collectRequestParams": {
+    "ui:field": "Table",
+    "items": {
+      "name": { "ui:placeholder": "Enter parameter name", "ui:options": { "columnWidth": "40%" } },
+      "value": { "ui:widget": "JsInput", "ui:placeholder": "Enter parameter value expression", "ui:options": { "columnWidth": "60%" } }
+    }
+  },
+  "collectRequestHeaders": {
+    "ui:field": "Table",
+    "items": {
+      "name": { "ui:placeholder": "Enter header name", "ui:options": { "columnWidth": "40%" } },
+      "value": { "ui:widget": "JsInput", "ui:placeholder": "Enter header value", "ui:options": { "columnWidth": "60%" } }
+    }
+  },
+  "loginUrl": {
+    "ui:widget": "JsInput", "ui:placeholder": "Enter URL expression for the login url", "ui:options": { "columnWidth": "60%" }
+  },
+  "loginBody": {
+    "ui:widget": "TextareaUpload",
+    "ui:options": {
+      "rows": 1
+    }
+  }
+}

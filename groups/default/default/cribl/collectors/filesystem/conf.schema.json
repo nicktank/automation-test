@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "title": "",
+  "required": ["path"],
+  "properties": {
+    "outputName": {
+      "type": "string",
+      "title": "Auto-populate from",
+      "description": "Select a predefined configuration (e.g., a Destination) to auto-populate collector settings."
+    },
+    "path": {
+      "type": "string",
+      "title": "Directory",
+      "description": "The directory from which to collect data. Templating is supported, e.g.: /myDir/${datacenter}/${host}/${app}/. Time-based tokens are also supported, e.g.: /myOtherDir/${_time:%Y}/${_time:%m}/${_time:%d}/",
+      "minLength": 1,
+      "templated": true
+    },
+    "recurse": {
+      "type": "boolean",
+      "title": "Recursive",
+      "description": "Whether to recurse through subdirectories.",
+      "default": true
+    },
+    "maxBatchSize": {
+      "type": "number",
+      "title": "Max Batch Size (files)",
+      "description": "Maximum number of metadata files to batch before recording as results.",
+      "minimum": 1,
+      "default": 10
+    }
+  }
+}
