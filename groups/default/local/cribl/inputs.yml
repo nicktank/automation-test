@@ -1,0 +1,8 @@
+inputs:
+  CriblLogs:
+    type: cribl
+    disabled: false
+  CriblMetrics:
+    type: criblmetrics
+    disabled: false
+    pipeline: cribl_metrics_rollup
