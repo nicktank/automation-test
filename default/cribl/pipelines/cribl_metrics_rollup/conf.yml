@@ -1,0 +1,21 @@
+functions:
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: This pipeline is configured by default to pre-process the CriblMetrics data (system internal metrics). The Rollup Metrics function is used to rollup all metrics to a 30s time window.
+  - id: rollup_metrics
+    filter: "true"
+    disabled: null
+    conf:
+      dimensions:
+        - "*"
+      timeWindow: 30s
+      gaugeRollup: last
+  - id: eval
+    filter: source === 'cribl' && _metric
+    disabled: null
+    conf:
+      add:
+        - name: __inputId
+          value: "'cribl:CriblMetrics'"
