@@ -1,0 +1,19 @@
+outputs:
+  SplunkHEC:
+    systemFields:
+      - cribl_pipe
+    url: http://l18.27.205.66:8088/services/collector/event
+    nextQueue: indexQueue
+    tcpRouting: nowhere
+    concurrency: 5
+    maxPayloadSizeKB: 4096
+    compress: false
+    timeoutSec: 30
+    flushPeriodSec: 1
+    enableMultiMetrics: false
+    onBackpressure: queue
+    pqMaxFileSize: 1 MB
+    pqPath: $CRIBL_HOME/state/queues
+    pqCompress: none
+    type: splunk_hec
+    token: "#42:zbnZFZlQ7AzEIufFP7IWi40kkVKR0iaN1V6lhJQOeOk="
