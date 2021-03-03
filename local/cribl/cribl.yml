@@ -14,7 +14,15 @@ api:
 auth:
   type: local
   filter_type: email_whitelist
-git: {}
+git:
+  authType: basic
+  autoAction: none
+  user: nicktank
+  password: "#42:XNF9vEEEu6spcJE6sz1SeTGbIgN/mNtVIWrveBjaNirl4jzxzW5VtxSdPGcoluERMbg6yc\
+    VQ5g56/lIFaxlrOA=="
+  remote: https://github.com/nicktank/testing-git-integration.git
+  commitDeploySingleAction: true
+  defaultCommitMessage: Commit
 tls:
   defaultEcdhCurve: auto
   rejectUnauthorized: true
