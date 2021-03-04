@@ -33,7 +33,8 @@
       "title": "Renaming Expression",
       "description": "JavaScript expression (or literal) used to compute fields new name. Expression is evaluated against {name, value} context. The value returned by this expression will be used to rename fields. Example: `name.startsWith('data') ? name.toUpperCase() : name`",
       "type": "string",
-      "jsExpression": true
+      "jsExpression": true,
+      "renameExpr": true
     }    
   }
 }

@@ -242,6 +242,52 @@
         }
       }
     },
+    "pagination": {
+      "type": "object",
+      "required": [ "type" ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "Pagination",
+          "description": "Select collect pagination scheme",
+          "enum": [ "none", "response_body", "response_header"],
+          "enumNames": [ "None", "Response Body Attribute", "Response Header Attribute"],
+          "default": "none"
+        }
+      },
+      "errorMessage": "Please choose one of the pagination options.",
+      "dependencies": {
+        "type": {
+          "oneOf": [
+            {
+              "properties": {
+                "type": {
+                  "enum" : ["none"]
+                }
+              }
+            },
+            {
+              "required": ["attribute","maxPages"],
+              "properties": {
+                "type" : { "enum" : ["response_body","response_header"] },
+                "attribute": {
+                  "type": "string",
+                  "title": "Response Attribute",
+                  "description": "The name of the attribute in the response that contains next page information"
+                },
+                "maxPages": {
+                  "type": "number",
+                  "title": "Max Pages",
+                  "description": "The maximum number of pages to retrieve, set to 0 to retrieve all pages",
+                  "default": 50,
+                  "minimum": 0
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
     "authentication": {
       "type": "string",
       "title": "Authentication",

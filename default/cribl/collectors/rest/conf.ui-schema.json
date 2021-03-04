@@ -80,5 +80,52 @@
     "ui:options": {
       "rows": 1
     }
+  },
+  "ui:options": {
+    "groups": {
+      "discover": {
+        "title": "Discover",
+        "collapsed": true,
+        "properties": [
+          "discovery",
+          "discoverType",
+          "discoverUrl",
+          "discoverMethod",
+          "discoverRequestParams",
+          "discoverBody",
+          "discoverRequestHeaders",
+          "discoverDataField",
+          "manualDiscoverResult",
+          "discoverDataField",
+          "itemList"
+        ]
+      },
+      "collect": {
+        "title": "Collect",
+        "collapsed": false,
+        "properties": [
+          "collectUrl",
+          "collectMethod",
+          "collectRequestParams",
+          "collectBody",
+          "collectRequestHeaders",
+          "pagination"
+        ]
+      },
+      "authentication": {
+        "title": "Authentication",
+        "collapsed": true,
+        "properties": [
+          "authentication",
+          "loginUrl",
+          "username",
+          "password",
+          "loginBody",
+          "tokenRespAttribute",
+          "authHeaderExpr"
+        ]
+      }
+    }
   }
+
 }

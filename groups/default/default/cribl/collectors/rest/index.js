@@ -6,7 +6,7 @@ exports.disabled = false;
 exports.destroyable = false;
 
 const { Expression, NestedPropertyAccessor, PartialEvalRewrite } = C.expr;
-const { httpSearch, isHttp200, RestAuthType, RestVerb, HttpError, wrapExpr } = C.internal.HttpUtils;
+const { httpSearch, isHttp200, RestAuthType, RestVerb, HttpError, wrapExpr, PaginationType } = C.internal.HttpUtils;
 
 let filter;
 let batchSize;
@@ -17,6 +17,7 @@ const discoverOpts = {};
 const collectOpts = {};
 let earliest;
 let latest;
+let collectDone = false;
 
 const DISC_TYPE_NONE = 'none';
 const DISC_TYPE_HTTP = 'http';
@@ -43,6 +44,17 @@ function validateCollectOpts(opts, conf) {
   }
   if (conf.collectMethod === 'post_with_body' && !opts.postBody) {
     throw new Error('Invalid Argument: Collect postBody is required when Post with Body is specified!');
+  }
+  if (opts.pagination && !Object.values(PaginationType).includes(opts.pagination.type)) {
+    throw new Error(`Invalid Argument: Unexpected pagination type: ${opts.pagination.type}`);
+  }
+  if (opts.pagination && (opts.pagination.type === PaginationType.RESP_BODY || opts.pagination.type === PaginationType.RESP_HEADER)) {
+    if (opts.pagination.typeOpts == null || !opts.pagination.typeOpts.nextPageField)  {
+      throw new Error(`Invalid Argument: pagination type: ${opts.pagination.type} missing required field pagination.typeOpts.nextPageField!`);
+    }
+    if (opts.pagination.typeOpts.maxPages == null) {
+      throw new Error(`Invalid Argument: pagination type: ${opts.pagination.type} missing required field pagination.typeOpts.maxPages!`);
+    }
   }
 }
 
@@ -158,7 +170,7 @@ exports.init = async (opts) => {
   }
   // Collect
   if (conf.collectUrl) {
-    collectOpts.authType = conf.authentication;
+    collectOpts.authType = conf.authentication || RestAuthType.NONE;
     collectOpts.url = conf.collectUrl;
     collectOpts.method = getMethod(conf.collectMethod)
     collectOpts.params = {};
@@ -170,6 +182,13 @@ exports.init = async (opts) => {
     collectOpts.stream = true;
     copyParams(conf.collectRequestParams, collectOpts.params);
     copyParams(conf.collectRequestHeaders, collectOpts.headers);
+    const paginationType = conf.pagination && conf.pagination.type ? conf.pagination.type : PaginationType.NONE;
+    const typeOpts = {};
+    if (paginationType === PaginationType.RESP_HEADER || paginationType === PaginationType.RESP_BODY) {
+      typeOpts.nextPageField = conf.pagination.attribute;
+      typeOpts.maxPages = conf.pagination.maxPages;
+    }
+    collectOpts.pagination = { type: paginationType, typeOpts };
   }
   validateCollectOpts(collectOpts, conf);
 };
@@ -248,14 +267,15 @@ exports.discover = async (job) => {
     throw error;
   }
 };
-
 exports.collect = async (collectible, job) => {
+  if (collectible.__pageNum == null) collectible.__pageNum = 1;
   try {
     await authenticate(collectOpts, job.logger());
-    const opts = { ...collectOpts, exprArgs: { ...collectible, earliest, latest } };
-    // Apply collectible args to the URL as the URL can have embedded template variables.
+    const opts = { ...collectOpts, exprArgs: { ...collectible, earliest, latest }, pagination: { ...collectOpts.pagination, job, collectible } };
+
+    opts.url = collectible.urlOverride || opts.url;
     const result = await httpSearch(opts, job.logger());
-    result.res.on('end', () => {
+    result.res.on('end', async() => {
       if (!isHttp200(result.res.statusCode)) {
         const error = new HttpError('http error', result.res.statusCode, { host: result.host, port: result.port, path: result.path, method: result.method });
         job.reportError(error).catch(() => {});

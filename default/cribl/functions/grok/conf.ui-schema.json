@@ -1,4 +1,13 @@
 {
+  "pattern": {
+    "ui:widget": "GrokInput",
+    "ui:options": {
+      "numLines": 10,
+      "language": "grok",
+      "jsonSchema": true,
+      "popupEditor": "GrokEditor"
+    }
+  },
   "patternList": {
     "ui:field": "Table",
     "items": {

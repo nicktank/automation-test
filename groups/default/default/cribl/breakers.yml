@@ -250,6 +250,20 @@ Office 365:
       eventBreakerRegex: /[\n\r]+(?!\s)/
       name: mgmt-activity
       jsonTimeField: CreationTime
+    - condition: source.includes('MessageTrace')
+      type: json_array
+      jsonArrayField: value
+      timestampAnchorRegex: /^/
+      timestamp:
+        type: format
+        length: 150
+        format: "%Y-%m-%dT%H:%M:%S.%f"
+      timestampTimezone: local
+      maxEventBytes: 51200
+      jsonExtractAll: true
+      eventBreakerRegex: /[\n\r]+(?!\s)/
+      name: msg-trace
+      jsonTimeField: EndDate
 Cribl - Do Not Break Ruleset:
   lib: cribl
   description: Special rule to NOT break streams into events (capped by Max Event Bytes)

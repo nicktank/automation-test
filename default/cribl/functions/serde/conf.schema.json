@@ -57,7 +57,8 @@
       "title": "Fields Filter Expression",
       "description": "Expression evaluated against {index, name, value} context. Return truthy to keep field, falsy to remove.",
       "type": "string",
-      "jsExpression": true
+      "jsExpression": true,
+      "fieldFilterExpr": true
     }
   },
   "dependencies": {
