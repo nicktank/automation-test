@@ -107,23 +107,30 @@ function processRegex(conf, event, fieldStr) {
     for (let k = 1; k < conf.key2value.length; k++) {
       const kv = conf.key2value[k];
       const gName = conf.regex.groups[k];
+      let key;
+      let value;
       if (kv === -1 && gName) { // simple capture group
-        if (!overwrite && event[gName] !== undefined) {
-          // Field exists on event which means we are dealing with an MV field extraction.
-          if (Array.isArray(event[gName])) {
-            // Field is already array, add the newly extracted value.
-            event[gName].push(m[k]);
-          } else {
-            // field is currently name=value, extract current value and convert to array.
-            event[gName] = [event[gName], m[k]];
-          }
-        } else {
-          event[gName] = m[k];
-        }
+        key = gName;
+        value = m[k];
       } else if (kv > 0) { // _NAME = _VALUE pair
-        event[formatFieldName(m[k])] = m[kv];
+        key = formatFieldName(m[k]);
+        value = m[kv];
       } else {
         // ignore - value of a kv pair
+        continue;
+      }
+      const currentValue = event[key];
+      if (!overwrite && currentValue !== undefined) {
+        // Field exists on event which means we are dealing with an MV field extraction.
+        if (Array.isArray(currentValue)) {
+          // Field is already array, add the newly extracted value.
+          currentValue.push(value);
+        } else {
+          // field is currently name=value, extract current value and convert to array.
+          event[key] = [currentValue, value];
+        }
+      } else {
+        event[key] = value;
       }
     }
   }

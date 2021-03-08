@@ -42,7 +42,9 @@
           "eventField" :{
             "type": "string",
             "title": "Lookup Field Name in Event",
-            "description": "Field name as it appears in events."
+            "description": "Field name as it appears in events.",
+            "pattern": "^[a-zA-Z$_][a-zA-Z0-9$_\\[\\]\\.'\"]*$",
+            "$comment": "Matches any properly formed property reference where the first segment is a simple attribute name (e.g. property[\"someProperty\"][0].anotherProperty[2][\"somethingElse\"]."
           },
           "lookupField" :{
             "type": "string",
@@ -68,7 +70,9 @@
           "eventField" :{
             "type": "string",
             "title": "Lookup Field Name in Event",
-            "description": "(Optional:) Field name to add to event. Defaults to lookup field name."
+            "description": "(Optional:) Field name to add to event. Defaults to lookup field name.",
+            "pattern": "^[a-zA-Z$_][a-zA-Z0-9$_\\[\\]\\.'\"]*$",
+            "$comment": "Matches any properly formed property reference where the first segment is a simple attribute name (e.g. property[\"someProperty\"][0].anotherProperty[2][\"somethingElse\"]."
           },
           "defaultValue" :{
             "type": "string",

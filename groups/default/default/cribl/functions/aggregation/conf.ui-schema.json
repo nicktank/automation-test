@@ -7,7 +7,7 @@
   },
   "groupbys": {
     "ui:field": "Tags",
-    "ui:placeholder": "One or more fields to group by. Optional."
+    "ui:placeholder": "One or more fields (or wildcard expression) to group by. Optional."
   },
   "timeWindow": {
     "ui:options": {

@@ -52,7 +52,7 @@
     "groupbys": {
       "type": "array",
       "title": "Group by fields",
-      "description": "Fields to group aggregates by.",
+      "description": "Fields to group aggregates by, supports wildcard expressions.",
       "items": {
         "type": "string"
       }
