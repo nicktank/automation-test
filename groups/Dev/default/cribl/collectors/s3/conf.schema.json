@@ -1,0 +1,131 @@
+{
+  "type": "object",
+  "title": "",
+  "required": ["bucket"],
+  "properties": {
+    "outputName": {
+      "type": "string",
+      "title": "Auto-populate from",
+      "description": "The name of the predefined Destination that will be used to auto-populate collector settings."
+    },
+    "bucket": {
+      "type": "string",
+      "title": "S3 bucket",
+      "minLength": 1,
+      "description": "S3 Bucket from which to collect data.",
+      "placeholder": "Enter S3 bucket."
+    },
+    "region": {
+      "type": "string",
+      "title": "Region",
+      "description": "Region from which to retrieve data.",
+      "enum": [
+        "us-east-1",
+        "us-east-2",
+        "us-west-1",
+        "us-west-2",
+        "af-south-1",
+        "ca-central-1",
+        "eu-west-1",
+        "eu-central-1",
+        "eu-west-2",
+        "eu-south-1",
+        "eu-west-3",
+        "eu-north-1",
+        "ap-east-1",
+        "ap-northeast-1",
+        "ap-northeast-2",
+        "ap-southeast-1",
+        "ap-southeast-2",
+        "ap-south-1",
+        "me-south-1",
+        "sa-east-1",
+        "us-gov-west-1"
+      ],
+      "enumNames": [
+        "US East (N. Virginia)",
+        "US East (Ohio)",
+        "US West (N. California)",
+        "US West (Oregon)",
+        "Africa (Cape Town)",
+        "Canada (Central)",
+        "EU (Ireland)",
+        "EU (Frankfurt)",
+        "EU (London)",
+        "EU (Milan)",
+        "EU (Paris)",
+        "EU (Stockholm)",
+        "Asia Pacific (Hong Kong)",
+        "Asia Pacific (Tokyo)",
+        "Asia Pacific (Seoul)",
+        "Asia Pacific (Singapore)",
+        "Asia Pacific (Sydney)",
+        "Asia Pacific (Mumbai)",
+        "Middle East (Bahrain)",
+        "South America (São Paulo)",
+        "US Gov West 1"
+      ]
+    },
+    "path": {
+      "type": "string",
+      "title": "Path",
+      "description": "The directory from which to collect data. Templating is supported, e.g.: myDir/${datacenter}/${host}/${app}/. Time-based tokens are also supported, e.g.: myOtherDir/${_time:%Y}/${_time:%m}/${_time:%d}/",
+      "minLength": 1,
+      "templated": true
+    },
+    "awsApiKey": {
+      "type": "string",
+      "title": "API key",
+      "description": "API key. If not present, will fall back on env.AWS_ACCESS_KEY_ID, or the meta-data endpoint for IAM creds. Optional when running on AWS."
+    },
+    "awsSecretKey": {
+      "type": "string",
+      "title": "Secret Key",
+      "description": "Secret key. If not present, will fallback on env.AWS_SECRET_ACCESS_KEY, or the meta-data endpoint for IAM creds. Optional when running on AWS.",
+      "encrypt": true
+    },
+    "endpoint": {
+      "type": "string",
+      "title": "Endpoint",
+      "description": "S3 service endpoint. If empty, the endpoint will be automatically constructed from the region."
+    },
+    "signatureVersion": {
+      "type": "string",
+      "title": "Signature version",
+      "description": "Signature version to use for signing S3 requests.",
+      "default": "v4",
+      "enum": ["v2", "v4"]
+    },
+    "enableAssumeRole": {
+      "type":"boolean",
+      "title": "Enable Assume Role",
+      "description": "Use Assume Role credentials.",
+      "default": false
+    },
+    "assumeRoleArn": {
+      "type":"string",
+      "title": "AssumeRole ARN",
+      "description": "Amazon Resource Name (ARN) of the role to assume.",
+      "pattern": "^arn:",
+      "minLength": 20
+    },
+    "assumeRoleExternalId": {
+      "type": "string",
+      "title": "External ID",
+      "description": "External ID to use when assuming role."
+    },
+    "recurse": {
+      "type": "boolean",
+      "title": "Recursive",
+      "description": "Whether to recurse through subdirectories.",
+      "default": true
+    },
+    "maxBatchSize": {
+      "type": "number",
+      "title": "Max Batch Size (objects)",
+      "description": "Maximum number of metadata objects to batch before recording as results.",
+      "minimum": 1,
+      "default": 10
+    }
+  }
+}

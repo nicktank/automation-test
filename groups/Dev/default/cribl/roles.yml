@@ -1,0 +1,24 @@
+admin:
+  description: 'Members with admin role have permission to do anything and everything in the system.'
+  policy:
+    - '* *'
+reader_all:
+  description: 'Members with reader_all role get read-only access to all Worker Groups.'
+  policy:
+    - GroupRead *
+editor_all:
+  description: 'Members with editor_all role get read/write access to all Worker Groups.'
+  policy:
+    - GroupEdit *
+owner_all:
+  description: 'Members with owner_all role get read/write access as well as Deploy permissions to all Worker Groups.'
+  policy:
+    - GroupFull *
+user:
+  description: 'The base user role allows users to see the system info along with their own profile settings.'
+  policy:
+    - GET /system/info
+    - GET /system/info/*
+    - GET /system/users
+    - GET /system/instance/distributed
+    - GET /system/instance/distributed/*
