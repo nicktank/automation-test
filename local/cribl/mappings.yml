@@ -1,0 +1,22 @@
+rulesets:
+  default:
+    conf:
+      functions:
+        - filter: "!cribl.group"
+          conf:
+            add:
+              - name: groupId
+                value: "'default'"
+          id: eval
+          description: Default Mappings
+          disabled: false
+          final: true
+        - filter: conn_ip=="34.219.27.95"
+          conf:
+            add:
+              - name: groupId
+                value: "'Dev'"
+          id: eval
+          final: true
+          description: Dev Group
+    active: true

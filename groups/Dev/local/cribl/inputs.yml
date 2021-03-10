@@ -1,0 +1,25 @@
+inputs:
+  in_splunk_hec:
+    disabled: false
+    host: 0.0.0.0
+    tls:
+      disabled: true
+    splunkHecAPI: /services/collector
+    splunkHecAcks: false
+    staleChannelFlushMs: 10000
+    type: splunk_hec
+    port: 8088
+  PaloAltoFirewall:
+    disabled: false
+    host: 0.0.0.0
+    maxBufferSize: 1000
+    ipWhitelistRegex: /.*/
+    timestampTimezone: local
+    singleMsgUdpPackets: false
+    enableProxyHeader: false
+    keepFieldsList: []
+    tls:
+      disabled: true
+    type: syslog
+    udpPort: 514
+    tcpPort: 9700
