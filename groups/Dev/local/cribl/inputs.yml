@@ -9,6 +9,10 @@ inputs:
     staleChannelFlushMs: 10000
     type: splunk_hec
     port: 8088
+  CriblMetrics:
+    type: criblmetrics
+    disabled: false
+    pipeline: cribl_metrics_rollup
   PaloAltoFirewall:
     disabled: false
     host: 0.0.0.0
