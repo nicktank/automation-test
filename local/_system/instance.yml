@@ -8,4 +8,4 @@ distributed:
     ipWhitelistRegex: /.*/
     maxActiveCxn: 1000
     authToken: criblmaster
-    enabledWorkerRemoteAccess: false
+    enabledWorkerRemoteAccess: true
