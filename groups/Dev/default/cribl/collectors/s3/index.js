@@ -6,6 +6,7 @@ exports.destroyable = false;
 
 let dir;
 let filter;
+let extractors;
 
 let provider;
 let batchSize;
@@ -26,8 +27,17 @@ exports.init = (opts) => {
     mockClient: opts.mockClient,
     enableAssumeRole: conf.enableAssumeRole || false,
     assumeRoleArn: conf.assumeRoleArn,
-    assumeRoleExternalId: conf.assumeRoleExternalId
+    assumeRoleExternalId: conf.assumeRoleExternalId,
+    reuseConnections: conf.reuseConnections != null ? conf.reuseConnections : true,
+    rejectUnauthorized: conf.rejectUnauthorized != null ? conf.rejectUnauthorized : true
   });
+  if (conf.extractors) {
+    extractors = {};
+    const { Expression } = C.expr;
+    conf.extractors.forEach(pair => {
+      extractors[pair.key] = new Expression(pair.expression);
+    });
+  }
   exports.provider = provider;
   return provider.init();
 };
@@ -38,7 +48,7 @@ function reportErrorIfAny(job, err) {
 }
 
 exports.discover = async (job) => {
-  const pathFilter = C.internal.Path.pathFilter(dir, filter, provider, job.logger());
+  const pathFilter = C.internal.Path.pathFilter(dir, filter, provider, job.logger(), extractors);
   let curPath = await pathFilter.getNextPath();
   reportErrorIfAny(job, pathFilter.getLastError());
   const results = [];

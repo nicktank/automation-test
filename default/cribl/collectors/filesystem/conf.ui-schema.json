@@ -15,6 +15,20 @@
       }
     }
   },
+  "extractors": {
+    "ui:widget": "Table",
+    "items": {
+      "key": {
+        "ui:options": { "columnWidth": "30%" },
+        "ui:placeholder": "Enter extractor token"
+      },
+      "expression": {
+        "ui:widget": "JsInputWithoutPopup",
+        "ui:options": { "columnWidth": "70%" },
+        "ui:placeholder": "Enter extractor expression"
+      }
+    }
+  },
   "recurse": {
     "ui:options": { "inline": true, "width": "30%" }
   },

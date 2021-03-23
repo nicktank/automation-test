@@ -10,6 +10,7 @@ const _path = require('path');
 
 let dir;
 let recurse;
+let extractors;
 let filter;
 let provider;
 let batchSize;
@@ -22,6 +23,13 @@ exports.init = (opts) => {
   dir = C.util.resolveEnvVars(dir);
   dir = _path.resolve(dir);
   recurse = conf.recurse || false;
+  if (conf.extractors) {
+    extractors = {};
+    const { Expression } = C.expr;
+    conf.extractors.forEach(pair => {
+      extractors[pair.key] = new Expression(pair.expression);
+    });
+  }
   filter = conf.filter || 'true';
   batchSize = conf.maxBatchSize || 10;
   provider = C.internal.Path.fileSystemProvider(recurse, dir);
@@ -34,7 +42,7 @@ function reportErrorIfAny(job, err) {
 }
 
 exports.discover = async (job) => {
-  const pathFilter = C.internal.Path.pathFilter(dir, filter, provider, job.logger());
+  const pathFilter = C.internal.Path.pathFilter(dir, filter, provider, job.logger(), extractors);
   let curPath = await pathFilter.getNextPath();
   reportErrorIfAny(job, pathFilter.getLastError());
   const results = [];

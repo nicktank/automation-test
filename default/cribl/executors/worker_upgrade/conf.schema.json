@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "title": "",
+  "required": ["packageUrl"],
+  "properties": {
+    "packageUrl": {
+      "type": "string",
+      "title": "Package URL",
+      "description": "Download URL for the LogStream binary",
+      "minLength": 1
+    },
+    "packageVersion": {
+      "type": "string",
+      "title": "LogStream version",
+      "description": "Version to install",
+      "minLength": 1
+    },
+    "authToken": {
+      "type": "string",
+      "title": "Auth token",
+      "description": "Package download auth token",
+      "minLength": 1
+    },
+    "hashUrl": {
+      "type": "string",
+      "title": "Verification hash url",
+      "description": "Download url for the verification hash file",
+      "minLength": 1
+    }
+  }
+}

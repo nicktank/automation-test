@@ -1,0 +1,14 @@
+id: default
+groups: {}
+routes:
+  - id: default
+    name: default
+    final: false
+    disabled: false
+    pipeline: main
+    description: ""
+    clones:
+      - "": ""
+        foo: bar
+    filter: "true"
+    output: default
