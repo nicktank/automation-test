@@ -21,11 +21,6 @@ functions:
       add:
         - name: __inputId
           value: "'cribl:CriblMetrics'"
-  - id: drop
-    filter: _metric.includes('cribl.logstream.host')
-    disabled: null
-    conf: {}
-    final: false
   - id: tee
     filter: "true"
     disabled: null
@@ -34,5 +29,5 @@ functions:
       env: {}
       command: foo123
       args:
-        - arg
+        - hello.py
 groups: {}
