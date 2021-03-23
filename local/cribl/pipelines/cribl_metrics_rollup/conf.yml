@@ -27,7 +27,7 @@ functions:
     conf:
       restartOnExit: true
       env: {}
-      command: foo123
+      command: python3
       args:
         - somearg
 groups: {}
