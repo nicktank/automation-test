@@ -20,7 +20,6 @@ git:
   user: nicktank
   password: "#42:XNF9vEEEu6spcJE6sz1SeTGbIgN/mNtVIWrveBjaNirl4jzxzW5VtxSdPGcoluERMbg6yc\
     VQ5g56/lIFaxlrOA=="
-  remote: https://github.com/nicktank/testing-git-integration.git
   commitDeploySingleAction: true
   defaultCommitMessage: Commit
 tls:
