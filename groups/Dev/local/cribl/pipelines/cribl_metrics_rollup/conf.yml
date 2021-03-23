@@ -14,6 +14,15 @@ functions:
         - "*"
       timeWindow: 30s
       gaugeRollup: last
+  - id: tee
+    filter: "true"
+    disabled: null
+    conf:
+      restartOnExit: true
+      env: {}
+      command: foo123
+      args:
+        - arg
   - id: eval
     filter: source === 'cribl' && _metric
     disabled: null
@@ -26,13 +35,4 @@ functions:
     disabled: null
     conf: {}
     final: false
-  - id: tee
-    filter: "true"
-    disabled: null
-    conf:
-      restartOnExit: true
-      env: {}
-      command: foo123
-      args:
-        - arg
 groups: {}
