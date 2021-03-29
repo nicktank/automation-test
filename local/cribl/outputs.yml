@@ -1,0 +1,80 @@
+outputs:
+  MySplunkCloud:
+    systemFields:
+      - cribl_pipe
+    dnsResolvePeriodSec: 600
+    loadBalanceStatsPeriodSec: 300
+    maxConcurrentSenders: 0
+    nestedFields: none
+    throttleRatePerSec: "0"
+    onBackpressure: block
+    indexerDiscovery: false
+    tls:
+      disabled: true
+    connectionTimeout: 10000
+    writeTimeout: 60000
+    enableMultiMetrics: false
+    enableACK: true
+    excludeSelf: true
+    hosts:
+      - host: inputs1.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs2.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs3.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs4.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs5.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs6.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs7.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs8.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs9.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs10.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs11.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs12.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs13.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs14.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+      - host: inputs15.cloud-architects.splunkcloud.com
+        port: 9997
+        tls: inherit
+        weight: 1
+    type: splunk_lb

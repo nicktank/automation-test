@@ -1,0 +1,34 @@
+output: default
+groups: {}
+asyncFuncTimeout: 1000
+functions:
+  - id: regex_extract
+    filter: "true"
+    disabled: null
+    conf:
+      source: _raw
+      iterations: 100
+      overwrite: false
+      regex: /\[(?<alert>alertName:.*)\]/
+      regexList: []
+  - id: serde
+    filter: "true"
+    disabled: null
+    conf:
+      mode: extract
+      type: delim
+      delimChar: ","
+      srcField: alert
+      cleanFields: true
+      fields: []
+      keep:
+        - "*"
+      dstField: alert_kvs
+  - id: regex_extract
+    filter: "true"
+    disabled: true
+    conf:
+      source: alert
+      iterations: 100
+      overwrite: false
+      regex: /(?<kvpair>[a-zA-Z]+\:[A-Za-z0-9\$\- ]+)/
