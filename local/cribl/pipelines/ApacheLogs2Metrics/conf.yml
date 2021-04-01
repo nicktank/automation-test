@@ -23,7 +23,7 @@ functions:
         - _*
   - id: publish_metrics
     filter: "true"
-    disabled: null
+    disabled: false
     conf:
       overwrite: false
       dimensions:
@@ -34,11 +34,11 @@ functions:
       fields:
         - metricType: gauge
           inFieldName: bytes
-          outFieldExpr: total_bytes
+          outFieldExpr: "`net.bytes`"
   - id: eval
     filter: "true"
     disabled: null
     conf:
       add:
         - name: index
-          value: main
+          value: apache_metrics
