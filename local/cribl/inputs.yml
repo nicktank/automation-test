@@ -3,3 +3,9 @@ inputs:
     type: criblmetrics
     disabled: false
     pipeline: cribl_metrics_rollup
+  apache_common:
+    disabled: false
+    samples:
+      - eventsPerSec: 10
+        sample: apache_common
+    type: datagen

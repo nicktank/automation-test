@@ -1,0 +1,22 @@
+id: default
+groups: {}
+routes:
+  - id: LUu6HO
+    name: Apache Common Logs
+    final: false
+    disabled: false
+    pipeline: ApacheLogs2Metrics
+    description: ""
+    clones:
+      - {}
+    filter: __inputId=='datagen:apache_common'
+    output: default
+  - id: default
+    name: default
+    final: true
+    disabled: false
+    pipeline: main
+    description: ""
+    clones: []
+    filter: "true"
+    output: default
