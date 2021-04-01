@@ -78,3 +78,20 @@ outputs:
         tls: inherit
         weight: 1
     type: splunk_lb
+  SplunkSingleInstance:
+    systemFields:
+      - cribl_pipe
+    url: http://ec2-34-219-27-95.us-west-2.compute.amazonaws.com:8088/services/collector/event
+    nextQueue: indexQueue
+    tcpRouting: nowhere
+    concurrency: 5
+    maxPayloadSizeKB: 4096
+    maxPayloadEvents: 0
+    compress: false
+    timeoutSec: 30
+    flushPeriodSec: 1
+    enableMultiMetrics: false
+    onBackpressure: block
+    type: splunk_hec
+    token: "#42:1XmeYj2QeCpKVqaclb0v/u8vWm2BSJ7ISsve/4XN5f9QSP3okgMSqvMumdNdEyeCO7E1\
+      F34AoE2GnsAx9F2qfQ=="

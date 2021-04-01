@@ -10,7 +10,7 @@ routes:
     clones:
       - {}
     filter: __inputId=='datagen:apache_common'
-    output: default
+    output: SplunkSingleInstance
   - id: default
     name: default
     final: true

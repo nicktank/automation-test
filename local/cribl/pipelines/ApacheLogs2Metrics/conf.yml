@@ -1,4 +1,37 @@
 output: default
 groups: {}
 asyncFuncTimeout: 1000
-functions: []
+functions:
+  - id: serde
+    filter: "true"
+    disabled: null
+    conf:
+      mode: extract
+      type: clf
+      srcField: _raw
+      fields:
+        - clientip
+        - ident
+        - user
+        - timestamp
+        - request
+        - status
+        - bytes
+      keep:
+        - "*"
+      remove:
+        - _*
+  - id: publish_metrics
+    filter: "true"
+    disabled: null
+    conf:
+      overwrite: false
+      dimensions:
+        - "!_*"
+        - "*"
+      removeMetrics: []
+      removeDimensions: []
+      fields:
+        - metricType: gauge
+          inFieldName: bytes
+          outFieldExpr: total_bytes
