@@ -11,6 +11,15 @@ routes:
       - {}
     filter: __inputId=='datagen:apache_common'
     output: SplunkSingleInstance
+  - id: uc0HJc
+    name: Cribl Internal Metrics
+    final: true
+    disabled: false
+    pipeline: MyDumbPipe
+    description: ""
+    clones: []
+    filter: __inputId=='cribl:CriblMetrics'
+    output: SplunkSingleInstance
   - id: default
     name: default
     final: true
