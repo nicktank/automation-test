@@ -13,13 +13,23 @@ routes:
     output: SplunkSingleInstance
   - id: uc0HJc
     name: Cribl Internal Metrics
-    final: true
+    final: false
     disabled: false
     pipeline: MyDumbPipe
     description: ""
-    clones: []
+    clones:
+      - {}
     filter: __inputId=='cribl:CriblMetrics'
     output: SplunkSingleInstance
+  - id: FW9R50
+    name: Palo Alto
+    final: true
+    disabled: false
+    pipeline: passthru
+    description: ""
+    clones: []
+    filter: __inputId=='datagen:palo_alto'
+    output: SplunkTCP
   - id: default
     name: default
     final: true

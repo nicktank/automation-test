@@ -95,3 +95,34 @@ outputs:
     type: splunk_hec
     token: "#42:1XmeYj2QeCpKVqaclb0v/u8vWm2BSJ7ISsve/4XN5f9QSP3okgMSqvMumdNdEyeCO7E1\
       F34AoE2GnsAx9F2qfQ=="
+  SplunkTCP:
+    systemFields:
+      - cribl_pipe
+    compression: none
+    throttleRatePerSec: "0"
+    tls:
+      disabled: true
+    connectionTimeout: 10000
+    writeTimeout: 60000
+    onBackpressure: block
+    type: tcpjson
+    host: 34.219.27.95
+    port: 9998
+  SplunkSyslogTCP:
+    systemFields:
+      - cribl_pipe
+    protocol: tcp
+    facility: 1
+    severity: 5
+    appName: Cribl
+    messageFormat: rfc3164
+    timestampFormat: syslog
+    throttleRatePerSec: "0"
+    connectionTimeout: 10000
+    writeTimeout: 60000
+    tls:
+      disabled: true
+    onBackpressure: block
+    type: syslog
+    host: 34.219.27.95
+    port: 9998

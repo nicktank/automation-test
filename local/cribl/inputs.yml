@@ -9,3 +9,9 @@ inputs:
       - eventsPerSec: 10
         sample: apache_common
     type: datagen
+  palo_alto:
+    disabled: false
+    samples:
+      - eventsPerSec: 10
+        sample: palo_alto_traffic
+    type: datagen
