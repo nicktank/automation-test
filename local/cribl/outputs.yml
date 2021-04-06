@@ -126,3 +126,18 @@ outputs:
     type: syslog
     host: 34.219.27.95
     port: 9998
+  SplunkClassic:
+    systemFields:
+      - cribl_pipe
+    port: 9997
+    nestedFields: none
+    throttleRatePerSec: "0"
+    tls:
+      disabled: true
+    connectionTimeout: 10000
+    writeTimeout: 60000
+    enableMultiMetrics: false
+    enableACK: true
+    onBackpressure: block
+    type: splunk
+    host: 34.219.27.95
