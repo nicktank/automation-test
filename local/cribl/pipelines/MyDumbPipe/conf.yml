@@ -32,3 +32,17 @@ functions:
       iterations: 100
       overwrite: false
       regex: /(?<kvpair>[a-zA-Z]+\:[A-Za-z0-9\$\- ]+)/
+  - id: publish_metrics
+    filter: "true"
+    disabled: null
+    conf:
+      overwrite: false
+      dimensions:
+        - "!_*"
+        - "*"
+      removeMetrics: []
+      removeDimensions: []
+      fields:
+        - metricType: gauge
+          inFieldName: _metric
+          outFieldExpr: "'${_metric}.${host}'"
