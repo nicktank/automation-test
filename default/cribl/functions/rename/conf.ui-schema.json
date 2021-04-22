@@ -1,7 +1,7 @@
 {
   "baseFields": {
     "ui:field": "Tags",
-    "ui:placeholder": "Source field name",
+    "ui:placeholder": "Parent field name(s)",
     "ui:options": {
       "typeaheadItems": "fields"
     }
@@ -26,5 +26,14 @@
   "renameExpr": {
     "ui:widget": "JsInput",
     "ui:placeholder": "Enter renaming expression"
+  },
+  "ui:options": {
+    "groups": {
+      "advanced": {
+        "title": "Advanced Settings",
+        "collapsed": true,
+        "properties": ["wildcardDepth"]
+      }
+    }
   }
 }

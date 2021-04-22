@@ -11,6 +11,7 @@ let readyClientProm;         // wait on this promise for redis client to be read
 let waitForReconnect = true; // whether to wait for client to reconnect on every event 
 let waitForReconnectTimeout; // timeout which when expired and client is still disconnected sets waitForReconnect=false
 let conf;
+let redactedUrl;
 
 exports.unload = () => {
   client && client.quit();
@@ -27,12 +28,12 @@ function getClient() {
   if(readyClientProm) return readyClientProm;
   readyClientProm = new Promise((resolve, reject) => {
     const onReady = () => {
-      cLogger.info('connected', {url: conf.url});
+      cLogger.info('connected', {url: redactedUrl});
       client.removeListener('end', onEnd);
       resolve(client);
     };
     const onEnd = () => {
-      cLogger.info('disconnected, will retry to reconnect', {url: conf.url});
+      cLogger.info('disconnected, will retry to reconnect', {url: redactedUrl});
       readyClientProm = undefined;
       client && client.removeListener('ready', onReady);
       reject(new Error('disconnected from redis server'));
@@ -61,8 +62,10 @@ exports.init = (opt) => {
     };
   });
 
+  redactedUrl = redactUrl(conf.url);
+
   const maxBlockSecs = (conf.maxBlockSecs || 0) * 1000;
-  cLogger.info('connecting', {url: conf.url});
+  cLogger.info('connecting', {url: redactedUrl});
   const tls = conf.url.startsWith('rediss://') ? {rejectUnauthorized: false} : undefined; // allow for self-signed certs
   client = Redis.createClient({
     url: conf.url,
@@ -80,7 +83,7 @@ exports.init = (opt) => {
   client.on('ready', () => {waitForReconnect = true;});
   client.on('end', () => {
     clearTimeout(waitForReconnectTimeout);
-    cLogger.info('disconnected, will retry to reconnect', {url: conf.url});
+    cLogger.info('disconnected, will retry to reconnect', {url: redactedUrl});
     readyClientProm = undefined;
     waitForReconnectTimeout = maxBlockSecs === 0 || client == null ? undefined : setTimeout(() => {
       if(!client || client.ready) return; // noop, client has been reconnected since or unloaded
@@ -88,10 +91,16 @@ exports.init = (opt) => {
       waitForReconnect = false;
     }, maxBlockSecs)
   });
-  client.on('reconnecting', opts => cLogger.info('reconnecting', {url: conf.url, ...opts}));
+  client.on('reconnecting', opts => cLogger.info('reconnecting', {url: redactedUrl, ...opts}));
   client.on('error', error => cLogger.error('redis client error', {error}));
   getClient().catch(()=>{}); // init readyClientProm
 };
+
+function redactUrl(url) {
+  return url.replace(/(rediss?:\/\/)([^@]+?@)(.+)/, (match, group1, group2, group3) => {
+    return `${group1}...@${group3}`;
+  })
+}
 
 exports.process = (event) => {
   if(!event) return event;

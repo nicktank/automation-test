@@ -1,7 +1,7 @@
 exports.name = 'Clone';
 exports.version = '0.2';
 exports.group = 'Advanced';
-const { NestedPropertyAccessor } = C.expr;
+const { NestedPropertyAccessor, runExprSafe } = C.expr;
 
 let clones = [];
 let cloneKeys = [];
@@ -27,7 +27,7 @@ exports.process = (event) => {
     const vals = cloneVals[i];
     const copy = event.__clone(false, eventKeys);
     for (let k = 0; k < keys.length; k++) {
-      keys[k].set(copy, vals[k]);
+      keys[k].set(copy, runExprSafe(vals[k], event));
     }
     result[i + 1] = copy;
   }

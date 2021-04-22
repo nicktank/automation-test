@@ -27,3 +27,6 @@ tls:
   rejectUnauthorized: true
 proxy:
   useEnvVars: true
+upgradeSettings:
+  useCustomUpgradeUrl: true
+  packageUrl: https://www.google.com/url?q=https://cdn.cribl.io/dl/2.4.5/cribl-2.4.5-RC2-206b4a9c-linux-x64.tgz

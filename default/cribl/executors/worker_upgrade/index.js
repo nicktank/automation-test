@@ -2,27 +2,31 @@ exports.jobType = 'task-per-node';
 exports.name = 'worker_upgrade';
 let upgradeClient;
 let packageVersion;
-let packageUrl;
-let hashUrl;
+let localHashUrl;
+let localPackageUrl;
 let authToken;
 
 const {
-  internal: { UpgradeClient },
+  internal: { UpgradeClient, performPackageDownload },
 } = C;
 
 exports.initJob = async (opts) => {
   const { conf } = opts.conf.executor;
-  packageVersion = conf.packageVersion;
-  packageUrl = conf.packageUrl;
-  hashUrl = conf.hashUrl;
+
+  const { packageFile, packageUrl, hashUrl, hashFile, version, hashType } = conf.packageDownloadInfo;
+  await performPackageDownload(packageUrl, packageFile, hashUrl, hashFile, hashType);
+
+  packageVersion = version;
+  localPackageUrl = conf.localPackageUrl;
+  localHashUrl = conf.localHashUrl;
   authToken = conf.authToken;
 };
 exports.jobSeedTask = async () => {
   return {
     task: {
       packageVersion,
-      packageUrl,
-      hashUrl,
+      packageUrl: localPackageUrl,
+      hashUrl: localHashUrl,
       authToken,
     },
   };

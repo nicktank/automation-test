@@ -141,3 +141,17 @@ outputs:
     onBackpressure: block
     type: splunk
     host: 34.219.27.95
+  this_is_output:
+    systemFields:
+      - cribl_pipe
+    logType: Cribl
+    concurrency: 5
+    maxPayloadSizeKB: 4096
+    maxPayloadEvents: 0
+    compress: false
+    timeoutSec: 30
+    flushPeriodSec: 1
+    onBackpressure: block
+    type: azure_logs
+    workspaceId: this_is_it
+    workspaceKey: "#42:7T/maHShSDMSCHCcsnKoVQ+Irt/tyQ4jFmCjpadtfoM="
