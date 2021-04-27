@@ -22,6 +22,7 @@ git:
     VQ5g56/lIFaxlrOA=="
   commitDeploySingleAction: true
   defaultCommitMessage: Commit
+  remote: https://github.com/nicktank/automation-test.git
 tls:
   defaultEcdhCurve: auto
   rejectUnauthorized: true
