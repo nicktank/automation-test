@@ -173,7 +173,7 @@ outputs:
     customEventDelimiter: \n
     customContentType: application/x-ndjson
     type: webhook
-    url: http://localhost:9410
+    url: http://127.0.0.1:9411
   zipkintcpjson:
     systemFields:
       - cribl_pipe
