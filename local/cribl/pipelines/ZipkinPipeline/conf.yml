@@ -1,0 +1,18 @@
+output: default
+groups: {}
+asyncFuncTimeout: 1000
+functions:
+  - id: eval
+    filter: "true"
+    disabled: null
+    conf:
+      add:
+        - name: _raw
+          value: JSON.parse(_raw)[0]
+  - id: sampling
+    filter: "true"
+    disabled: null
+    conf:
+      rules:
+        - filter: _raw.tags.http.method=='GET' && _raw.tags.http.status_code==200
+          rate: 3
