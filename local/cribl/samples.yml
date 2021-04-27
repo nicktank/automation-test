@@ -1,1 +1,11 @@
-{}
+HUDypb:
+  sampleName: bethssite-library.log
+  ttl: 24
+  created: 1619497996901
+  size: 39283
+  numEvents: 10
+alQXt6:
+  sampleName: zipkin-simplespans.log
+  created: 1619498564300
+  size: 45992
+  numEvents: 27

@@ -15,3 +15,17 @@ inputs:
       - eventsPerSec: 10
         sample: palo_alto_traffic
     type: datagen
+  zipkin_traces:
+    disabled: false
+    host: 0.0.0.0
+    tls:
+      disabled: true
+    maxActiveReq: 256
+    staleChannelFlushMs: 10000
+    allowedPaths:
+      - "*"
+    allowedMethods:
+      - "*"
+    type: http_raw
+    port: 8088
+    splunkHecAPI: ""

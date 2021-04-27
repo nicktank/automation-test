@@ -1,0 +1,18 @@
+output: default
+groups: {}
+asyncFuncTimeout: 1000
+functions:
+  - id: unroll
+    filter: "true"
+    disabled: true
+    conf:
+      srcExpr: _raw
+      dstField: new_field
+  - id: serde
+    filter: "true"
+    disabled: null
+    conf:
+      mode: extract
+      type: json
+      srcField: _raw
+      dstField: newfield
