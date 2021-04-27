@@ -4,7 +4,7 @@ asyncFuncTimeout: 1000
 functions:
   - id: eval
     filter: "true"
-    disabled: true
+    disabled: false
     conf:
       add:
         - name: index
@@ -14,6 +14,7 @@ functions:
       remove:
         - "*"
         - _*
+        - cribl_pipe
   - id: numerify
     filter: "true"
     disabled: null

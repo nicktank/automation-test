@@ -159,7 +159,7 @@ outputs:
     systemFields:
       - cribl_pipe
     method: POST
-    format: custom
+    format: json_array
     authType: none
     concurrency: 5
     maxPayloadSizeKB: 4096
@@ -168,28 +168,12 @@ outputs:
     timeoutSec: 30
     flushPeriodSec: 1
     onBackpressure: block
+    customSourceExpression: __httpOut
     customDropWhenNull: false
     customEventDelimiter: \n
     customContentType: application/x-ndjson
     type: webhook
-    url: http://localhost:9411/
-    status:
-      health: Red
-      timestamp: 1619566024922
-      metrics:
-        numBytesInBuffer: 0
-        numEventsInBuffer: 0
-        concurrentRequests: 0
-        lastFlushTime: 1619565953434
-        sentCount: 54
-        numDropped: 0
-        parseErrorCount: 0
-      error:
-        message: Request failed
-        details:
-          reason: Received status code=302, method=POST, url=http://localhost:9411/
-          response: ""
-          moreInfo: Check cribl.log for more details
+    url: http://localhost:9410
   zipkintcpjson:
     systemFields:
       - cribl_pipe
