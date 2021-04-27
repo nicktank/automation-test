@@ -4,17 +4,13 @@ asyncFuncTimeout: 1000
 functions:
   - id: eval
     filter: "true"
-    disabled: false
+    disabled: true
     conf:
       add:
         - name: _raw
           value: JSON.parse(_raw)[0]
       keep: []
-      remove:
-        - _raw.tags.otel*
-        - _raw.tags.telemetry*
-        - _raw.debug
-        - _raw.tags*
+      remove: []
   - id: numerify
     filter: "true"
     disabled: null
