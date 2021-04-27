@@ -159,7 +159,7 @@ outputs:
     systemFields:
       - cribl_pipe
     method: POST
-    format: custom
+    format: json_array
     authType: none
     concurrency: 5
     maxPayloadSizeKB: 4096
@@ -168,12 +168,23 @@ outputs:
     timeoutSec: 30
     flushPeriodSec: 1
     onBackpressure: block
-    customSourceExpression: __httpOut
+    customSourceExpression: _raw
     customDropWhenNull: false
     customEventDelimiter: \n
     customContentType: application/x-ndjson
     type: webhook
     url: http://0.0.0.0:9411/
+    status:
+      health: Green
+      timestamp: 1619565602869
+      metrics:
+        numBytesInBuffer: 0
+        numEventsInBuffer: 0
+        concurrentRequests: 0
+        lastFlushTime: 1619561693605
+        sentCount: 0
+        numDropped: 0
+        parseErrorCount: 0
   zipkintcpjson:
     systemFields:
       - cribl_pipe
