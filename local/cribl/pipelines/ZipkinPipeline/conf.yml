@@ -9,6 +9,11 @@ functions:
       add:
         - name: _raw
           value: JSON.parse(_raw)[0]
+      keep:
+        - debug
+        - duration
+      remove:
+        - tags.http.*
   - id: sampling
     filter: "true"
     disabled: null
