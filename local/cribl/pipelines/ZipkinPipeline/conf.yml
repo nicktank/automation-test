@@ -15,6 +15,7 @@ functions:
         - _raw.tags.telemetry*
         - _raw.debug
         - _raw.http*
+        - _raw.tags*
   - id: numerify
     filter: "true"
     disabled: null
