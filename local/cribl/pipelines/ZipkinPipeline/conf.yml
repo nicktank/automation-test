@@ -4,19 +4,41 @@ asyncFuncTimeout: 1000
 functions:
   - id: eval
     filter: "true"
-    disabled: true
+    disabled: false
     conf:
       add:
         - name: _raw
           value: JSON.parse(_raw)[0]
-        - name: "'span'"
-          value: _raw
       keep: []
-      remove: []
+      remove:
+        - _raw.tags.otel*
+        - _raw.tags.telemetry*
+        - _raw.debug
+  - id: numerify
+    filter: "true"
+    disabled: null
+    conf:
+      format: none
+      ignoreFields: []
+      digits: .nan
+  - id: flatten
+    filter: "true"
+    disabled: true
+    conf:
+      fields: []
+      depth: 5
+      delimiter: _
+  - id: rename
+    filter: "true"
+    disabled: true
+    conf:
+      wildcardDepth: 5
+      rename: []
+      renameExpr: name.replace(/span\.tags\.http\.status_code/,"span_tags_http_status_code")
   - id: sampling
     filter: "true"
     disabled: true
     conf:
       rules:
-        - filter: _raw.tags.http.method=='GET' && _raw.tags.http.status_code==200
+        - filter: _raw.tags.http.status_code===200
           rate: 3
