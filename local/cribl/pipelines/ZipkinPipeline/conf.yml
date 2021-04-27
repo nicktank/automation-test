@@ -7,10 +7,13 @@ functions:
     disabled: true
     conf:
       add:
-        - name: _raw
-          value: JSON.parse(_raw)[0]
-      keep: []
-      remove: []
+        - name: index
+          value: main
+      keep:
+        - _raw
+      remove:
+        - "*"
+        - _*
   - id: numerify
     filter: "true"
     disabled: null

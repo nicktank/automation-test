@@ -9,7 +9,7 @@ routes:
     description: ""
     clones: []
     filter: __inputId=='http_raw:zipkin_traces'
-    output: ZipkinLocal
+    output: SplunkClassic
   - id: LUu6HO
     name: Apache Common Logs
     final: false
