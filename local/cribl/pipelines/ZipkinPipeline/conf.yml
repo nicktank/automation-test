@@ -14,7 +14,6 @@ functions:
         - _raw.tags.otel*
         - _raw.tags.telemetry*
         - _raw.debug
-        - _raw.http*
         - _raw.tags*
   - id: numerify
     filter: "true"
