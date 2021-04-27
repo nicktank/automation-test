@@ -1,6 +1,15 @@
 id: default
 groups: {}
 routes:
+  - id: 8U9dXy
+    name: ZipKinData
+    final: true
+    disabled: false
+    pipeline: ZipkinPipeline
+    description: ""
+    clones: []
+    filter: __inputId=='http_raw:zipkin_traces'
+    output: FileSystems
   - id: LUu6HO
     name: Apache Common Logs
     final: false

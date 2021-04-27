@@ -4,19 +4,18 @@ asyncFuncTimeout: 1000
 functions:
   - id: eval
     filter: "true"
-    disabled: null
+    disabled: true
     conf:
       add:
         - name: _raw
           value: JSON.parse(_raw)[0]
-      keep:
-        - debug
-        - duration
-      remove:
-        - tags.http.*
+        - name: "'span'"
+          value: _raw
+      keep: []
+      remove: []
   - id: sampling
     filter: "true"
-    disabled: null
+    disabled: true
     conf:
       rules:
         - filter: _raw.tags.http.method=='GET' && _raw.tags.http.status_code==200

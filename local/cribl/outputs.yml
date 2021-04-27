@@ -155,3 +155,80 @@ outputs:
     type: azure_logs
     workspaceId: this_is_it
     workspaceKey: "#42:7T/maHShSDMSCHCcsnKoVQ+Irt/tyQ4jFmCjpadtfoM="
+  ZipkinLocal:
+    systemFields:
+      - cribl_pipe
+    method: POST
+    format: custom
+    authType: none
+    concurrency: 5
+    maxPayloadSizeKB: 4096
+    maxPayloadEvents: 0
+    compress: false
+    timeoutSec: 30
+    flushPeriodSec: 1
+    onBackpressure: block
+    customSourceExpression: __httpOut
+    customDropWhenNull: false
+    customEventDelimiter: \n
+    customContentType: application/x-ndjson
+    type: webhook
+    url: http://0.0.0.0:9411/
+  zipkintcpjson:
+    systemFields:
+      - cribl_pipe
+    compression: none
+    throttleRatePerSec: "0"
+    tls:
+      disabled: true
+    connectionTimeout: 10000
+    writeTimeout: 60000
+    onBackpressure: block
+    type: tcpjson
+    host: 34.220.99.147
+    port: 9411
+    status:
+      health: Red
+      timestamp: 1619542130904
+      metrics:
+        numBytesInBuffer: 487
+        numEventsInBuffer: 1
+        lastFlushTime: 1619542038948
+        lastFlushBytes: 0
+        connected: false
+        closed: false
+        lastConnectTime: 1619542038948
+        sentCount: 1
+        sentBytes: 0
+        dropBytes: 0
+        blockedSince: 1619542083956
+      error:
+        message: sender is blocked
+        details:
+          reason:
+            message: connect ECONNREFUSED 34.219.27.95:9411
+            stack: >-
+              Error: connect ECONNREFUSED 34.219.27.95:9411
+                  at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1146:16)
+  FileSystems:
+    systemFields:
+      - cribl_pipe
+    addIdToStagePath: true
+    partitionExpr: "`zipkin/${host}/${sourcetype}`"
+    format: raw
+    baseFileName: "`CriblOut`"
+    compress: none
+    maxFileSizeMB: 32
+    maxFileOpenTimeSec: 300
+    maxFileIdleTimeSec: 30
+    maxOpenFiles: 100
+    onBackpressure: block
+    type: filesystem
+    destPath: /home/ec2-user/logs/
+    status:
+      health: Green
+      timestamp: 1619543584290
+      metrics:
+        openFileStreams: 1
+        sentCount: 0
+        blocked: false
