@@ -1,6 +1,6 @@
 inputs:
   http:
-    disabled: false
+    disabled: true
     type: http
     host: 0.0.0.0
     port: 10080
