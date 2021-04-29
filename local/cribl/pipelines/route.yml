@@ -34,7 +34,7 @@ routes:
     name: Palo Alto
     final: true
     disabled: false
-    pipeline: palo_alto_traffic
+    pipeline: ZipkinPipeline
     description: ""
     clones: []
     filter: __inputId=='datagen:palo_alto'
