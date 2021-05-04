@@ -38,7 +38,7 @@
       "title": "Redis URL",
       "description": "Redis URL to connect to, format: redis[s]://[[user][:password@]][host][:port][/db-number][?db=db-number[&password=bar[&option=value]]]",
       "type": "string",
-      "pattern": "^redis[s]?://[a-zA-Z0-9].+"
+      "pattern": "^redis[s]?://[a-zA-Z0-9:].+"
     },
     "maxBlockSecs": {
       "type": "number",

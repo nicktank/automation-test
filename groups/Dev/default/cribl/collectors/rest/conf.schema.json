@@ -59,7 +59,8 @@
                         "type": "string",
                         "title": "Value",
                         "description": "JavaScript expression to compute the header value (can be a constant).",
-                        "jsExpression": true
+                        "jsExpression": true,
+                        "encrypt": true
                       }
                     }
                   }
@@ -237,7 +238,8 @@
             "type": "string",
             "title": "Value",
             "description": "JavaScript expression to compute the header value (can be a constant).",
-            "jsExpression": true
+            "jsExpression": true,
+            "encrypt": true
           }
         }
       }

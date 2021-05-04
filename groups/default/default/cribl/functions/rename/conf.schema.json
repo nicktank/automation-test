@@ -3,13 +3,13 @@
   "title": "",
   "properties": {
     "baseFields": {
-      "title": "Base Fields",
-      "description": "Base field(s) on which renaming tasks will be executed. If not specified, rename will be performed on top level fields.",
+      "title": "Parent fields",
+      "description": "Specify fields whose children will inherit the Rename fields and Rename expression operations. Supports wildcards. If empty, only top-level fields will be renamed.",
       "type": "array",
       "items": {"type": "string"}
     },
     "rename": {
-      "title": "Rename Fields",
+      "title": "Rename fields",
       "description": "Set of key-value pairs to rename fields, where key is the current name and value is the new name",
       "type": "array",
       "items": {
@@ -18,23 +18,30 @@
         "properties": {
           "currentName": {
             "type": "string",
-            "title": "Current Name",
+            "title": "Current name",
             "description": "Name of the field to rename. Literal identifiers must be quoted."
           },
           "newName": {
             "type": "string",
-            "title": "New Name",
+            "title": "New name",
             "description": "The name the field will be renamed to. Literal identifiers must be quoted."
           }
         }
       }
     },
     "renameExpr": {
-      "title": "Renaming Expression",
-      "description": "JavaScript expression (or literal) used to compute fields new name. Expression is evaluated against {name, value} context. The value returned by this expression will be used to rename fields. Example: `name.startsWith('data') ? name.toUpperCase() : name`",
+      "title": "Rename expression",
+      "description": "Optional JavaScript expression whose returned value will be used to rename fields. Expression is evaluated against {name, value} context. Example: `name.startsWith('data') ? name.toUpperCase() : name`. You can access other fields' values via event.&lt;fieldName&gt;.",
       "type": "string",
       "jsExpression": true,
       "renameExpr": true
-    }    
+    },
+    "wildcardDepth": {
+      "type": "integer",
+      "title": "Parent field wildcard depth",
+      "description": "For wildcards specified in Parent fields, sets the maximum depth within events to match and rename fields. Enter `0` to match only top-level fields. Defaults to `5` levels down.",
+      "default": 5,
+      "minimum": 0
+    }
   }
 }

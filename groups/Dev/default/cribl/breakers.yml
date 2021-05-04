@@ -258,12 +258,12 @@ Office 365:
         type: format
         length: 150
         format: "%Y-%m-%dT%H:%M:%S.%f"
-      timestampTimezone: local
+      timestampTimezone: Etc/GMT-0
       maxEventBytes: 51200
       jsonExtractAll: true
       eventBreakerRegex: /[\n\r]+(?!\s)/
       name: msg-trace
-      jsonTimeField: EndDate
+      jsonTimeField: Received
 Cribl - Do Not Break Ruleset:
   lib: cribl
   description: Special rule to NOT break streams into events (capped by Max Event Bytes)

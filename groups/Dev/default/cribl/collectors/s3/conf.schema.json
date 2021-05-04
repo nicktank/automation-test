@@ -12,8 +12,8 @@
       "type": "string",
       "title": "S3 bucket",
       "minLength": 1,
-      "description": "S3 Bucket from which to collect data.",
-      "placeholder": "Enter S3 bucket."
+      "description": "S3 Bucket from which to collect data. This value can be a constant or a JavaScript expression that can only be evaluated at init time. E.g. referencing a Global Variable: `myBucket-${C.vars.myVar}`.",
+      "jsExpression": "warning"
     },
     "region": {
       "type": "string",
@@ -40,6 +40,7 @@
         "ap-south-1",
         "me-south-1",
         "sa-east-1",
+        "us-gov-east-1",
         "us-gov-west-1"
       ],
       "enumNames": [
@@ -63,6 +64,7 @@
         "Asia Pacific (Mumbai)",
         "Middle East (Bahrain)",
         "South America (São Paulo)",
+        "US Gov East 1",
         "US Gov West 1"
       ]
     },
@@ -98,8 +100,8 @@
     },
     "awsApiKey": {
       "type": "string",
-      "title": "API key",
-      "description": "API key. If not present, will fall back on env.AWS_ACCESS_KEY_ID, or the meta-data endpoint for IAM creds. Optional when running on AWS."
+      "title": "Access key",
+      "description": "Access key. If not present, will fall back on env.AWS_ACCESS_KEY_ID, or the meta-data endpoint for IAM creds. Optional when running on AWS."
     },
     "awsSecretKey": {
       "type": "string",

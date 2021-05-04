@@ -11,9 +11,9 @@
         "type": "object",
         "title": "Fields",
         "description": "Key value pairs to set/overwrite in the clone",
-        "properties": {},
         "additionalProperties": {
-          "type": "string"
+          "type": "string",
+          "jsExpression": true
         }
       } 
     }

@@ -4,6 +4,8 @@ exports.group = 'Standard';
 
 const { CSV, LookupSpec } = C.internal.Lookup;
 const cLogger = C.util.getLogger('func:lookup');
+const ENV_ROLE = 'CRIBL_ROLE';
+const ENV_CONFIG_HELPER = 'CONFIG_HELPER';
 
 let table;
 let file;
@@ -62,9 +64,24 @@ exports.init = (opts) => {
       const ls = new LookupSpec(inEventFields, outLookupFields, inLookupFields, outEventFields, false, ignoreCase);
       cLogger.info('Creating Lookup: ', { matchMode, matchType, file });
       table = CSV.getReference(file, ls, (+conf.reloadPeriodSec) || -1, matchMode, matchType);
-      return table.ready();
+      return table.ready()
+        .catch(err => {
+          if (err.code === 'ENOENT' && isConfigHelper()) {
+            cLogger.debug(`missing lookup file ${file} in cfg. helper`, { err });
+            return [{
+              func: exports.name,
+              severity: 'warn',
+              message: `The specified lookup file ${file} couldn't be found in this instance. Make sure it's present in Worker nodes.`
+            }];
+          }
+          throw err;
+        });
     });
 };
+
+function isConfigHelper() {
+    return process.env[ENV_ROLE] === ENV_CONFIG_HELPER;
+}
 
 exports.unload = () => {
   if (table) table.release();

@@ -42,14 +42,15 @@
     "ui:options": { "inline": true, "width": "30%" }
   },
   "awsApiKey": {
-    "ui:placeholder": "Enter API key (optional). If empty, IAM roles will be used."
+    "ui:placeholder": "Enter access key (optional). If empty, IAM roles will be used."
   },
   "awsSecretKey": {
     "ui:widget": "password",
     "ui:placeholder": "Enter secret key (optional). If empty, IAM roles will be used."
   },
   "bucket": {
-    "ui:placeholder": "Enter S3 bucket."
+    "ui:placeholder": "Enter S3 bucket.",
+    "ui:widget" : "JsInput"
   },
   "assumeRoleArn": {
     "ui:placeholder": "Enter AssumeRole ARN."

@@ -3,9 +3,3 @@ alQXt6:
   created: 1619498564300
   size: 45992
   numEvents: 27
-RnD3nx:
-  sampleName: otel-traces-simple.log
-  ttl: 24
-  created: 1619635730047
-  size: 16935
-  numEvents: 10
